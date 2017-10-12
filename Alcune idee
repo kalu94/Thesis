@@ -1,0 +1,122 @@
+\documentclass[a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[Lenny]{fncychap}
+\usepackage[a4paper, twoside]{geometry} 
+\usepackage{graphicx}       
+\usepackage{amsfonts}           
+\usepackage{hyperref}
+\usepackage{amsthm}          
+\usepackage{cleveref}
+\usepackage{frontespizio}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{amsmath} 
+\usepackage[italian]{babel}
+\hypersetup{ 
+    colorlinks = true,
+    linkcolor = {blue},
+    citecolor={red}
+}
+ 
+ \theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposizione}
+\newtheorem{cor}[thm]{Corollario}
+\theoremstyle{definizione}
+\newtheorem{defn}[thm]{Definizione}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Nota}
+\numberwithin{equation}{section}
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Imm}{Im}
+\DeclareMathOperator{\Rea}{Re}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\car}{char}
+\DeclareMathOperator{\disc}{disc}
+\newcommand{\oo}{\mathcal{O}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\Z}{\mathbb{Z}} 
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+%opening
+\begin{document}
+\chapter{Alcune idee}
+\section{Coefficiente di contrazione}
+	Sia $\Psi$ l'operatore definito a pag 14.
+	Ovvero, 
+	$$\Psi(\mu)(t)=-\int_a\theta^a e^{\theta^at}E_0^a\bar{m}_0(da)+\frac{\alpha}{2k}\int_t^Tds\mu(s)\int_a e^{\theta^a(t-s)}\bar{m}_0(da)+$$
+	$$-\frac{\alpha}{2k}\int_0^td\tau\int_\tau^Tds\mu(s)\int_a \theta^ae^{\theta^a(2\tau-t-s)}\bar{m}_0(da).$$
+	
+	\begin{defn}
+	Chiamiamo $$\varphi(t)=\int_a e^{\theta^a(t-s)}\bar{m}_0(da).$$
+		\end{defn}
+		
+	\begin{rem}
+	Essendo $\theta^a$ positiva, $\varphi(t)\le 1$ per $t\le 0$.
+	\end{rem}
+		
+	\begin{prop}
+	$$\Psi(\mu_1)(t)-\Psi(\mu_2)(t)=\frac{\alpha}{2k}\int_0^T ds (\mu_1(s)-\mu_2(s))G(s,t)$$
+	dove
+		$$G(t,s)=\begin{cases}
+	-\ \displaystyle\frac{\varphi(s-t)-\varphi(-s-t)}{2} & s\le t, \\
+	\displaystyle\frac{\varphi(t-s)+\varphi(-s-t)}{2} & s>t.
+	\end{cases}$$
+	\end{prop}
+	\begin{proof}
+		$$\Psi(\mu_1)(t)-\Psi(\mu_2)(t)=\frac{\alpha}{2k}\int_t^Tds (\mu_1(s)-\mu_2(s))\int_a e^{\theta^a(t-s)}\bar{m}_0(da)+$$
+	$$-\frac{\alpha}{2k}\int_0^td\tau\int_\tau^Tds (\mu_1(s)-\mu_2(s))\int_a \theta^ae^{\theta^a(2\tau-t-s)}\bar{m}_0(da)=$$
+	$$=\frac{\alpha}{2k}\int_t^Tds (\mu_1(s)-\mu_2(s))\varphi(t-s)+$$
+	$$-\frac{\alpha}{2k}\int_0^td\tau\int_\tau^Tds (\mu_1(s)-\mu_2(s))\varphi'(2\tau-t-s)=$$
+		$$=\frac{\alpha}{2k}\int_t^Tds (\mu_1(s)-\mu_2(s))\varphi(t-s)+$$
+	$$-\frac{\alpha}{2k}\bigg(\int_0^tds (\mu_1(s)-\mu_2(s))\displaystyle\frac{\varphi(s-t)-\varphi(-s-t)}{2}+\int_t^Tds (\mu_1(s)-\mu_2(s))\displaystyle\frac{\varphi(t-s)-\varphi(-s-t)}{2}\bigg)=$$
+	$$=\frac{\alpha}{2k}\int_0^T ds (\mu_1(s)-\mu_2(s))G(s,t)$$
+	\end{proof}
+	
+	\begin{cor}
+	$$\Vert\Psi(\mu_1)-\Psi(\mu_2)\Vert_\infty\le \frac{\alpha T}{2k}\Vert\mu_1-\mu_2\Vert_\infty,$$ tenendo conto della nota precedente.
+	\end{cor}
+	
+	\section{Osservazione sul learning}
+	
+	Assumiamo che valga la disuguaglianza $$\frac{\alpha T}{2k}<1,$$ che, per quanto dimostrato prima, assicura l'esistenza e unicita' della distribuzione ottima $\mu(t)$.
+	\\
+	
+	Supponiamo che tutti i giocatori ipotizzino una stima $\tilde\mu(t)$ della distribuzione ottima $\mu$, e che giochino quella. Al termine del gioco osservano una somma $m(t)$ delle velocita' di liquidazione. 
+	\\
+	
+	Al termine del gioco vogliamo capire quanto abbiamo sbagliato a stimare $\tilde\mu$, per aggiustare il tiro al prossimo gioco. Soprattutto, siamo interessati a sapere se abbiamo sbagliato in difetto o in eccesso. Quindi puo' essere interessante domandarsi: che relazione c'e' fra l'errore commesso $\tilde\mu(t)-\mu(t)$ e la differenza riscontrata $\tilde\mu(t)-m(t)$ (che puo' essere misurata)? L'articolo non ci dice nulla a tal riguardo. 
+	
+	\begin{prop}
+	$$\int_0^Tdt (\tilde\mu(t)-\mu(t))F(t)=\int_0^Tdt (\tilde\mu(t)-m(t))(t)$$
+	dove $F(T)$ e' una funzione $C^\infty$, decrescente, strettamente positiva, che vale $1$ in $0$.
+	
+	Piu' esattamente, abbiamo la seguente espressione esplicita per $F(t)$:
+	$$F(t)=1-\frac{\alpha}{2k}\int_{-t}^tdr\varphi(r-T).$$
+	(A me sembra un miracolo...)
+	\end{prop}
+	\begin{proof}
+	$$\tilde\mu(t)-\mu(t)=(\tilde\mu(t)-m(t))+(m(t)-\mu(t))=$$
+	$$=(\tilde\mu(t)-m(t))+(\Psi\tilde\mu(t)-\Psi\mu(t))=$$
+	$$=(\tilde\mu(t)-m(t))+\frac{\alpha}{2k}\int_0^T ds (\mu_1(s)-\mu_2(s))G(s,t),$$
+	per la proposizione precedente. Integrando in $t$, otteniamo
+	$$\int_0^T dt (\tilde\mu(t)-\mu(t))=\int_0^T dt(\tilde\mu(t)-m(t))+\frac{\alpha}{2k}\int_0^T ds (\tilde\mu(s)-\mu(s))\int_0^T dt G(s,t),$$ ovvero 
+	$$\int_0^Tdt (\tilde\mu(t)-\mu(t)) \bigg(1-\frac{\alpha}{2k}\int_{0}^TdrG(t,r)\bigg)=\int_0^Tdt (\tilde\mu(t)-m(t))(t)$$
+	Resta da dimostrare che $$\int_{0}^TdrG(t,r)=\int_{-t}^tdr\varphi(r-T),$$ e che la funzione $F(t)$ definita sopra rispetta effettivamente le condizioni date, ma sono entrambe semplici verifiche.
+	
+	\end{proof}
+	
+\end{document}
