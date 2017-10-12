@@ -106,7 +106,6 @@
 	
 	Piu' esattamente, abbiamo la seguente espressione esplicita per $F(t)$:
 	$$F(t)=1-\frac{\alpha}{2k}\int_{-t}^tdr\varphi(r-T).$$
-	(A me sembra un miracolo...)
 	\end{prop}
 	\begin{proof}
 	$$\tilde\mu(t)-\mu(t)=(\tilde\mu(t)-m(t))+(m(t)-\mu(t))=$$
